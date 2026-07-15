@@ -9,11 +9,23 @@ jobs:
   build:
     runs-on: self-hosted
 
+    env:
+      APP_NAME: ${{ vars.APP_NAME }}
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
+      VERSION: ${{ vars.VERSION }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Check Python Version
         run: python3 --version
+
+      - name: Display Environment Variables
+        run: |
+          echo "Application : $APP_NAME"
+          echo "Environment : $ENVIRONMENT"
+          echo "Version     : $VERSION"
 
       - name: Run Python Application
         run: python3 app.py
